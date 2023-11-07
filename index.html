@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>リダイレクト</title>
+    <title>半自動共有ツールPro</title>
     <style>
         #info {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
             font-size: 16px;
             color: gray;
         }
@@ -17,9 +14,10 @@
     <button id="createInputsButton">テキストを作成</button>
     <div id="inputs"></div>
     <input type="number" id="redirectInterval" placeholder="リダイレクト間隔（ミリ秒）">
+    <div id="redirectCountInfo"></div>
     <button id="startRedirectButton">リダイレクト開始</button>
     <button id="stopRedirectButton">リダイレクト停止</button>
-    <div id="info">ver. 0.01</div>
+    <div id="info">ver. 0.03</div>
 
     <script>
         let redirectTimer;
@@ -40,7 +38,7 @@
                     inputsDiv.appendChild(textInput);
                 }
             } else {
-                alert("テキストの数は正の整数で指定してください。");
+                alert("テキストの数は正の整数で指定してください.");
             }
         });
 
@@ -59,29 +57,31 @@
                                 const finalRedirectLink = `line://share?text=${encodedText}`;
                                 window.location.href = finalRedirectLink;
                                 redirectCount++;
+                                updateRedirectCount();
                             }
                         }
                     }, redirectInterval);
                 } else {
-                    alert("テキストを作成してください。");
+                    alert("テキストを作成してください.");
                 }
             } else {
-                alert("リダイレクト間隔は正の値で指定してください。");
+                alert("リダイレクト間隔は正の値で指定してください.");
             }
         });
 
         document.getElementById("stopRedirectButton").addEventListener("click", function() {
             clearInterval(redirectTimer);
-            alert("リダイレクトが停止しました。");
+            alert("リダイレクトが停止しました.");
         });
 
         // リダイレクト回数を表示
         function updateRedirectCount() {
-            document.getElementById("info").textContent = `リダイレクト回数: ${redirectCount}`;
+            const redirectCountInfo = document.getElementById("redirectCountInfo");
+            redirectCountInfo.textContent = `リダイレクト回数: ${redirectCount}`;
         }
 
-        // リダイレクト回数を更新
-        setInterval(updateRedirectCount, 1000); // 1秒ごとに更新
+        // リダイレクト回数を初期化
+        updateRedirectCount();
     </script>
 </body>
 </html>
