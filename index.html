@@ -4,7 +4,7 @@
     <title>半自動共有ツールPro</title>
     <style>
         body {
-            background-image: url('IMG_7114.jpg'); /* 画像のURLを指定 */
+            background-image: url(''); /* 画像のURLを指定 */
             background-attachment: fixed; /* 画像を固定 */
             background-size: cover; /* 画像を背景に合わせる */
         }
@@ -41,15 +41,14 @@
     </style>
 </head>
 <body>
-    <input type="text" placeholder="テキスト 1" id="textInput1">
-    <input type="number" id="textCount" placeholder="追加するテキストの数">
-    <button id="createInputsButton">テキストを追加</button>
+    <input type="number" id="textCount" placeholder="テキストの数">
+    <button id="createInputsButton">テキストを作成</button>
     <div id="inputs"></div>
     <input type="number" id="redirectInterval" placeholder="リダイレクト間隔（ミリ秒）">
-    <div id="redirectCountInfo"></div>
+    <div id="redirectCountInfo" style="font-size: 40px;"></div>
     <button id="startRedirectButton">リダイレクト開始</button>
     <button id="stopRedirectButton">リダイレクト停止</button>
-    <div id="info">ver. 0.04</div>
+    <div id="info">ver. 1.0</div>
 
     <script>
         let redirectTimer;
@@ -60,11 +59,12 @@
             const textCount = parseInt(document.getElementById("textCount").value);
             if (textCount > 0) {
                 const inputsDiv = document.getElementById("inputs");
+                inputsDiv.innerHTML = ''; // 既存の入力をクリア
 
                 for (let i = 0; i < textCount; i++) {
                     const textInput = document.createElement("input");
                     textInput.type = "text";
-                    textInput.placeholder = `テキスト ${i + 2}`;
+                    textInput.placeholder = `テキスト ${i + 1}`;
                     textInputs.push(textInput);
                     inputsDiv.appendChild(textInput);
                 }
@@ -78,6 +78,7 @@
 
             if (redirectInterval > 0) {
                 if (textInputs.length > 0) {
+                    alert("リダイレクトが開始しました.");
                     redirectTimer = setInterval(function() {
                         for (let i = 0; i < textInputs.length; i++) {
                             const textInput = textInputs[i];
@@ -92,9 +93,8 @@
                             }
                         }
                     }, redirectInterval);
-                    alert("リダイレクトが開始しました.");
                 } else {
-                    alert("テキストを追加してください.");
+                    alert("テキストを作成してください.");
                 }
             } else {
                 alert("リダイレクト間隔は正の値で指定してください.");
