@@ -1,0 +1,133 @@
+/* Reset CSS */
+*,
+::after,
+::before {
+    box-sizing: border-box
+}
+
+blockquote,
+body,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+p {
+    margin: 0
+}
+
+ol[role=list],
+ul[role=list] {
+    list-style: none
+}
+
+html:focus-within {
+    scroll-behavior: smooth
+}
+
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit
+}
+
+@media(prefers-reduced-motion:reduce) {
+    html:focus-within {
+        scroll-behavior: auto
+    }
+
+    *,
+    ::after,
+    ::before {
+        animation-duration: NaNs !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: NaNs !important;
+        scroll-behavior: auto !important
+    }
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#textCount,
+#redirectInterval {
+    padding: 10px;
+    margin: 5px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#textCount::placeholder,
+#redirectInterval::placeholder {
+    color: #999;
+}
+
+#createInputsButton,
+#startRedirectButton,
+#stopRedirectButton {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#createInputsButton {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+#startRedirectButton {
+    background-color: #3498db;
+    color: #fff;
+}
+
+#stopRedirectButton {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+#inputs {
+    margin: 20px 0;
+}
+
+#redirectCountInfo {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+#info {
+    margin-top: 20px;
+    color: #777;
+}

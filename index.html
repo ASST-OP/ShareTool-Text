@@ -2,118 +2,18 @@
 <html>
 <head>
     <title>半自動共有ツールPro</title>
-    <style>
-        body {
-            background-image: url(''); /* 画像のURLを指定 */
-            background-attachment: fixed; /* 画像を固定 */
-            background-size: cover; /* 画像を背景に合わせる */
-        }
-
-        select, input {
-            padding: 20px;
-            font-size: 32px;
-            margin: 20px;
-            border: 1.5px solid #000;
-            border-radius: 20px;
-        }
-
-        .button-container {
-            display: flex; /* フレックスボックスを使用して要素を横に並べる */
-        }
-        button {
-            padding: 20px 60px;
-            background: #E9E9E9;
-            font-size: 20px;
-            cursor: pointer;
-            border: 1.5px solid #000;
-            border-radius: 20px;
-            color: #067DFE;
-            margin-right: 10px; /* ボタン間の間隔を設定（必要に応じて調整） */
-        }
-        
-        #info {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            font-size: 16px;
-            color: gray;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <input type="number" id="textCount" placeholder="テキストの数">
     <button id="createInputsButton">テキストを作成</button>
     <div id="inputs"></div>
     <input type="number" id="redirectInterval" placeholder="リダイレクト間隔（ミリ秒）">
-    <div id="redirectCountInfo" style="font-size: 40px;"></div>
+    <div id="redirectCountInfo"></div>
     <button id="startRedirectButton">リダイレクト開始</button>
     <button id="stopRedirectButton">リダイレクト停止</button>
     <div id="info">ver. 0.05</div>
-
-    <script>
-        let redirectTimer;
-        let textInputs = [];
-        let redirectCount = 0;
-
-        document.getElementById("createInputsButton").addEventListener("click", function() {
-            const textCount = parseInt(document.getElementById("textCount").value);
-            if (textCount > 0) {
-                const inputsDiv = document.getElementById("inputs");
-                inputsDiv.innerHTML = ''; // 既存の入力をクリア
-
-                for (let i = 0; i < textCount; i++) {
-                    const textInput = document.createElement("input");
-                    textInput.type = "text";
-                    textInput.placeholder = `テキスト ${i + 1}`;
-                    textInputs.push(textInput);
-                    inputsDiv.appendChild(textInput);
-                }
-            } else {
-                alert("テキストの数は正の整数で指定してください.");
-            }
-        });
-
-        document.getElementById("startRedirectButton").addEventListener("click", function() {
-            const redirectInterval = parseInt(document.getElementById("redirectInterval").value);
-
-            if (redirectInterval > 0) {
-                if (textInputs.length > 0) {
-                    alert("リダイレクトが開始しました.");
-                    redirectTimer = setInterval(function() {
-                        for (let i = 0; i < textInputs.length; i++) {
-                            const textInput = textInputs[i];
-                            const customText = textInput.value;
-
-                            if (customText) {
-                                const encodedText = encodeURIComponent(customText);
-                                const finalRedirectLink = `line://share?text=${encodedText}`;
-                                window.location.href = finalRedirectLink;
-                                redirectCount++;
-                                updateRedirectCount();
-                            }
-                        }
-                    }, redirectInterval);
-                } else {
-                    alert("テキストを作成してください.");
-                }
-            } else {
-                alert("リダイレクト間隔は正の値で指定してください.");
-            }
-        });
-
-        document.getElementById("stopRedirectButton").addEventListener("click", function() {
-            clearInterval(redirectTimer);
-            alert("リダイレクトが停止しました.");
-        });
-
-        // リダイレクト回数を表示
-        function updateRedirectCount() {
-            const redirectCountInfo = document.getElementById("redirectCountInfo");
-            redirectCountInfo.textContent = `リダイレクト回数: ${redirectCount}`;
-        }
-
-        // リダイレクト回数を初期化
-        updateRedirectCount();
-    </script>
+    <script src="./js/index.js" defer></script>
 </body>
 </html>
